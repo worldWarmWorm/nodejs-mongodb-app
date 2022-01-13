@@ -21,6 +21,8 @@ app.set('views', 'views')
 // Делаем папку public статической
 app.use(express.static('public'))
 
+app.use(express.urlencoded({extended: true}))
+
 
 // Маршруты
 app.use('/', homeRoutes)
