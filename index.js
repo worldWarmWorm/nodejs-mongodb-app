@@ -1,5 +1,6 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
+const path = require('path')
 
 // Регистрируем роуты
 const homeRoutes = require('./routes/home')
@@ -22,7 +23,7 @@ app.set('views', 'views')
 
 
 // Делаем папку public статической
-app.use(express.static('public'))
+app.use(express.static(path.join(__dirname, 'public')))
 
 // middleware
 app.use(express.urlencoded({extended: true}))
