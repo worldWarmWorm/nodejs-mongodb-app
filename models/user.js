@@ -6,7 +6,7 @@ const userSchema = new Schema({
     required: true
   },
   name: {
-    type: Number,
+    type: String,
     required: true
   },
   cart: {
@@ -27,4 +27,4 @@ const userSchema = new Schema({
   }
 })
 
-module.exports = model('User', cuserSchemaourse)
+module.exports = model('User', userSchema)
