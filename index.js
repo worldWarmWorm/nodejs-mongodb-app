@@ -1,6 +1,9 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
 const path = require('path')
+const mongoose = require('mongoose')
+const Handlebars = require('handlebars')
+const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
 
 // Регистрируем роуты
 const homeRoutes = require('./routes/home')
@@ -14,7 +17,8 @@ const app = express()
 // Подключаем handlebar
 const hbs = exphbs.create({
   defaultLayout: 'main',
-  extname: 'hbs'
+  extname: 'hbs',
+  handlebars: allowInsecurePrototypeAccess(Handlebars)
 })
 
 app.engine('hbs', hbs.engine)
@@ -37,6 +41,17 @@ app.use('/card', cardRoutes)
 
 const PORT = process.env.PORT || 3000
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`)
-})
+async function start() {
+  try {
+    const url = `mongodb+srv://valeriq:LH3vK9Et7FegapP@cluster0.ztgug.mongodb.net/courses_app`
+    await mongoose.connect(url)
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`)
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+start()
+
