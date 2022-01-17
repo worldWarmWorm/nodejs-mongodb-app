@@ -9,19 +9,19 @@ document.querySelectorAll('.price').forEach((node) => {
   node.textContent = toCurrancy(node.textContent)
 })
 
-const $card = document.querySelector('#card')
+const $cart = document.querySelector('#cart')
 
-if ($card) {
-  $card.addEventListener('click', (event) => {
+if ($cart) {
+  $cart.addEventListener('click', (event) => {
     if (event.target.classList.contains('js-delete')) {
       const id = event.target.dataset.id;
 
-      fetch('/card/delete/' + id, {
+      fetch('/cart/delete/' + id, {
         method: 'DELETE'
       }).then(res => res.json())
-        .then(card => {
-          if (card.courses.length) {
-            const html = card.courses.map(c => {
+        .then(cart => {
+          if (cart.courses.length) {
+            const html = cart.courses.map(c => {
               return `
                 <tr>
                   <td>${c.title}</td>
@@ -35,10 +35,10 @@ if ($card) {
                 </tr>
               `
             }).join('')
-            $card.querySelector('tbody').innerHTML = html
-            $card.querySelector('.price').innerHTML = toCurrancy(card.price)
+            $cart.querySelector('tbody').innerHTML = html
+            $cart.querySelector('.price').innerHTML = toCurrancy(cart.price)
           } else {
-            $card.innerHTML = '<p>Корзина пуста</p>'
+            $cart.innerHTML = '<p>Корзина пуста</p>'
           }
         })
     }

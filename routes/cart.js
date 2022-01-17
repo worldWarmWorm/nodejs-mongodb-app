@@ -19,16 +19,16 @@ function computePrice(courses) {
 router.post('/add', async (req, res) => {
   const course = await Course.findById(req.body.id)
   await req.user.addToCart(course)
-  res.redirect('/card')
+  res.redirect('/cart')
 })
 
 router.get('/', async (req, res) => {
   const user = await req.user.populate('cart.items.courseId')
   const courses = mapCartItems(user.cart)
 
-  res.render('card', {
+  res.render('cart', {
     title: 'Корзина',
-    isCard: true,
+    isCart: true,
     courses: courses,
     price: computePrice(courses)
   })
