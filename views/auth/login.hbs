@@ -11,8 +11,12 @@
       </ul>
     </div>
     <div id="login" class="col s6 offset-s3">
+      {{#if loginError}}
+        <p class="alert">{{loginError}}</p>
+      {{/if}}
       <h3>Войти в магазин</h2>
       <form action="/auth/login" method="POST">
+        <input type="hidden" name="_csrf" value="{{csrf}}">
         <div class="input-field">
           <input
             id="email"
@@ -40,8 +44,12 @@
       </form>
     </div>
     <div id="register" class="col s6 offset-s3">
+      {{#if registerError}}
+        <p class="alert">{{registerError}}</p>
+      {{/if}}
       <h3>Создать аккаунт</h2>
       <form action="/auth/register" method="POST">
+        <input type="hidden" name="_csrf" value="{{csrf}}">
         <div class="input-field">
           <input
             id="remail"
@@ -76,6 +84,18 @@
           />
           <label for="confirm">Пароль ещё раз</label>
           <span class="helper-text" data-error="Введите пароль ещё раз"></span>
+        </div>
+
+        <div class="input-field">
+          <input
+            id="name"
+            name="name"
+            type="text"
+            class="validate"
+            required
+          />
+          <label for="name">Ваше имя</label>
+          <span class="helper-text" data-error="Введите имя"></span>
         </div>
         <button class="btn btn-primary" type="submit">Зарегистрироваться</button>
       </form>

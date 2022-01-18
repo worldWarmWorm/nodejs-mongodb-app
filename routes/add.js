@@ -20,8 +20,7 @@ router.post('/', auth, async (req, res) => {
 
   try {
     await course.save()
-    console.log(course)
-    // res.redirect('/courses')
+    res.redirect('/courses')
   } catch (error) {
     console.log(error)
   }

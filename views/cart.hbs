@@ -18,6 +18,7 @@
               <button
                 class="btn btn-small js-delete"
                 data-id="{{id}}"
+                data-csrf="{{@root.csrf}}"
               >Удалить</button>
             </td>
           </tr>
@@ -27,6 +28,7 @@
     <p><strong>Цена: </strong><span class="price">{{price}}</span></p>
 
     <form action="/orders" method="POST">
+      <input type="hidden" name="_csrf" value="{{csrf}}">
       <button type="submit" class="btn">Сделать заказ</button>
     </form>
   {{else}}

@@ -43,3 +43,13 @@ form {
 .auth {
   padding: 2rem 0;
 }
+
+.alert {
+  padding: .5rem 1rem;
+  border-radius: 10px;
+  text-align: center;
+  margin: 2rem 0 1rem;
+  background: rgba(255,0,0, .2);
+  color: #ff0000;
+  font-weight: bold;
+}

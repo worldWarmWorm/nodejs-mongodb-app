@@ -29,10 +29,12 @@ const $cart = document.querySelector('#cart')
 if ($cart) {
   $cart.addEventListener('click', (event) => {
     if (event.target.classList.contains('js-delete')) {
-      const id = event.target.dataset.id;
+      const id = event.target.dataset.id
+      const csrf = event.target.dataset.csrf
 
       fetch('/cart/delete/' + id, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: {'X-XSRF-TOKEN': csrf}
       }).then(res => res.json())
         .then(cart => {
           if (cart.courses.length) {
