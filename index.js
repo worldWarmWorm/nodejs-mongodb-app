@@ -16,15 +16,15 @@ const coursesRoutes = require('./routes/courses')
 const cartRoutes = require('./routes/cart')
 const orderRoutes = require('./routes/orders')
 const authRoutes = require('./routes/auth')
+const keys = require('./keys')
 
 // Запускаем express
 const app = express()
 
 // Записть сессий в базу
-const MONGODB_URI = 'mongodb+srv://valeriq:LH3vK9Et7FegapP@cluster0.ztgug.mongodb.net/courses_app'
 const store = new MongoStore({
   collection: 'sessions',
-  uri: MONGODB_URI
+  uri: keys.MONGODB_URI
 })
 
 // Подключаем handlebar
@@ -43,7 +43,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 // middleware
 app.use(express.urlencoded({ extended: true }))
 app.use(session({
-  secret: 'some secret value',
+  secret: keys.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   store
@@ -65,7 +65,7 @@ app.use('/auth', authRoutes)
 const PORT = process.env.PORT || 3000
 async function start() {
   try {
-    await mongoose.connect(MONGODB_URI)
+    await mongoose.connect(keys.MONGODB_URI)
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`)
     })
