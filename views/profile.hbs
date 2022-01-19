@@ -2,19 +2,22 @@
 
 <div class="row">
   <div class="col s6">
-    <img
-      class="avatar"
-      src="https://avatars.githubusercontent.com/u/499550?v=4"
-      alt="user-image.jpg"
-    />
-    {{! <img
-      class="avatar"
-      src="https://www.nicepng.com/png/detail/136-1366211_group-of-10-guys-login-user-icon-png.png"
-      alt="empty-user.jpg"
-    /> }}
+    {{#if user.avatarUrl}}
+      <img
+        class="avatar"
+        src="/{{user.avatarUrl}}"
+        alt="avatar-{{user.name}}"
+      />
+    {{else}}
+      <img
+        class="avatar"
+        src="/images/user.png"
+        alt="empty-avatar-{{user.name}}"
+      />
+    {{/if}}
   </div>
   <div class="col s6">
-    <form action="/profile" method="POST">
+    <form action="/profile" method="POST" enctype="multipart/form-data">
       <input type="hidden" name="_csrf" value="{{csrf}}">
       <p>Ваш email: <strong>{{user.email}}</strong></p>
       <div class="input-field">

@@ -41,8 +41,9 @@ app.engine('hbs', hbs.engine)
 app.set('view engine', 'hbs')
 app.set('views', 'views')
 
-// Делаем папку public статической
+// Делаем папки public статической
 app.use(express.static(path.join(__dirname, 'public')))
+app.use('/images', express.static(path.join(__dirname, 'images')))
 
 // middleware
 app.use(express.urlencoded({ extended: true }))
