@@ -4,6 +4,8 @@ const express = require('express'),
   csrf = require('csurf'),
   flash = require('connect-flash'),
   mongoose = require('mongoose'),
+  helmet = require('helmet'),
+  compression = require('compression'),
   Handlebars = require('handlebars'),
   {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access'),
   session = require('express-session'),
@@ -56,6 +58,8 @@ app.use(session({
 app.use(fileMiddleware.single('avatar'))
 app.use(csrf())
 app.use(flash())
+app.use(helmet())
+app.use(compression())
 app.use(varMiddleware)
 app.use(userMiddleware)
 
