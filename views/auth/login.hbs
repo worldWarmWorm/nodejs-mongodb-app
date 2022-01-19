@@ -15,7 +15,7 @@
         <p class="alert">{{loginError}}</p>
       {{/if}}
       <h3>Войти в магазин</h2>
-      <form action="/auth/login" method="POST" novalidate>
+      <form action="/auth/login" method="POST">
         <input type="hidden" name="_csrf" value="{{csrf}}">
         <div class="input-field">
           <input

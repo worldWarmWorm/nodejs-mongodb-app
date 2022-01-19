@@ -1,22 +1,25 @@
-const express = require('express')
-const exphbs = require('express-handlebars')
-const path = require('path')
-const csrf = require('csurf')
-const flash = require('connect-flash')
-const mongoose = require('mongoose')
-const Handlebars = require('handlebars')
-const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
-const session = require('express-session')
-const MongoStore = require('connect-mongodb-session')(session)
-const varMiddleware = require('./middleware/variables')
-const userMiddleware = require('./middleware/user')
-const homeRoutes = require('./routes/home')
-const addRoutes = require('./routes/add')
-const coursesRoutes = require('./routes/courses')
-const cartRoutes = require('./routes/cart')
-const orderRoutes = require('./routes/orders')
-const authRoutes = require('./routes/auth')
-const keys = require('./keys')
+const express = require('express'),
+  exphbs = require('express-handlebars'),
+  path = require('path'),
+  csrf = require('csurf'),
+  flash = require('connect-flash'),
+  mongoose = require('mongoose'),
+  Handlebars = require('handlebars'),
+  {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access'),
+  session = require('express-session'),
+  MongoStore = require('connect-mongodb-session')(session),
+  varMiddleware = require('./middleware/variables'),
+  userMiddleware = require('./middleware/user'),
+  homeRoutes = require('./routes/home'),
+  addRoutes = require('./routes/add'),
+  coursesRoutes = require('./routes/courses'),
+  cartRoutes = require('./routes/cart'),
+  orderRoutes = require('./routes/orders'),
+  authRoutes = require('./routes/auth'),
+  profileRoutes = require('./routes/prifile'),
+  errorHandler = require('./middleware/error'),
+  fileMiddleware = require('./middleware/file')
+  keys = require('./keys')
 
 // Запускаем express
 const app = express()
@@ -49,6 +52,7 @@ app.use(session({
   saveUninitialized: false,
   store
 }))
+app.use(fileMiddleware.single('avatar'))
 app.use(csrf())
 app.use(flash())
 app.use(varMiddleware)
@@ -60,7 +64,11 @@ app.use('/add', addRoutes)
 app.use('/courses', coursesRoutes)
 app.use('/cart', cartRoutes)
 app.use('/orders', orderRoutes)
-app.use('/auth', authRoutes)
+app.use('/auth', authRoutes),
+app.use('/profile', profileRoutes)
+
+// middleware для 404 страницы
+app.use(errorHandler)
 
 // Подключение к базе данных
 const PORT = process.env.PORT || 3000

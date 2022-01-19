@@ -48,8 +48,33 @@ form {
   padding: .5rem 1rem;
   border-radius: 10px;
   text-align: center;
-  margin: 2rem 0 1rem;
+  margin: 2rem 0;
   background: rgba(255,0,0, .2);
   color: #ff0000;
   font-weight: bold;
+  font-size: 1.4rem;
+}
+
+.warning {
+  padding: .5rem 1rem;
+  border-radius: 10px;
+  text-align: center;
+  margin: 2rem 0;
+  background: rgba(255, 196, 0, .3);
+  color: rgb(255, 196, 0);
+  font-weight: bold;
+  font-size: 1.4rem;
+}
+
+.page404 {
+  padding: 20px 0 60px;
+}
+
+img {
+  max-width: 100%;
+}
+
+.avatar {
+  max-width: 300px;
+  height: auto;
 }

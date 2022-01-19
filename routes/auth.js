@@ -1,15 +1,15 @@
-const {Router} = require('express')
-const User = require('../models/user')
-const nodemailer = require('nodemailer')
-const sendgrid = require('nodemailer-sendgrid-transport')
-const bcrypt = require('bcryptjs')
-const {validationResult} = require('express-validator')
-const {registerValidators, loginValidators} = require('../utils/validators')
-const {SENDGRID_API_KEY} = require('../keys')
-const registerEmail = require('../emails/registration')
-const resetEmail = require('../emails/reset')
-const crypto = require('crypto')
-const router = Router()
+const {Router} = require('express'),
+  User = require('../models/user'),
+  nodemailer = require('nodemailer'),
+  sendgrid = require('nodemailer-sendgrid-transport'),
+  bcrypt = require('bcryptjs'),
+  {validationResult} = require('express-validator'),
+  {registerValidators, loginValidators} = require('../utils/validators'),
+  {SENDGRID_API_KEY} = require('../keys'),
+  registerEmail = require('../emails/registration'),
+  resetEmail = require('../emails/reset'),
+  crypto = require('crypto'),
+  router = Router()
 
 const transporter = nodemailer.createTransport(sendgrid({
   auth: {api_key: SENDGRID_API_KEY}

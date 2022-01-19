@@ -1,0 +1,46 @@
+<h1>Профиль</h1>
+
+<div class="row">
+  <div class="col s6">
+    <img
+      class="avatar"
+      src="https://avatars.githubusercontent.com/u/499550?v=4"
+      alt="user-image.jpg"
+    />
+    {{! <img
+      class="avatar"
+      src="https://www.nicepng.com/png/detail/136-1366211_group-of-10-guys-login-user-icon-png.png"
+      alt="empty-user.jpg"
+    /> }}
+  </div>
+  <div class="col s6">
+    <form action="/profile" method="POST">
+      <input type="hidden" name="_csrf" value="{{csrf}}">
+      <p>Ваш email: <strong>{{user.email}}</strong></p>
+      <div class="input-field">
+        <input
+          id="name"
+          name="name"
+          type="text"
+          class="validate"
+          required
+          value="{{user.name}}"
+        />
+        <label for="name">Ваше имя</label>
+        <span class="helper-text" data-error="Имя не может быть пустым"></span>
+      </div>
+
+      <div class="file-field input-field">
+        <div class="btn">
+          <span>Аватар</span>
+          <input type="file" name="avatar">
+        </div>
+        <div class="file-path-wrapper">
+          <input class="file-path validate" type="text" />
+        </div>
+      </div>
+
+      <button class="btn">Изменить</button>
+    </form>
+  </div>
+</div>

@@ -38,7 +38,7 @@ exports.loginValidators = [
     if (!user) {
       return Promise.reject('Такого пользователя не существует')
     }
-  }),
+  }).trim(),
   body('password').custom(async (value, {req}) => {
     const {email} = req.body,
       user = await User.findOne({email}),
@@ -47,5 +47,11 @@ exports.loginValidators = [
     if (user && !isOwner) {
       return Promise.reject('Неверный пароль')
     }
-  })
+  }).trim()
+]
+
+exports.courseValidators = [
+  body('title', 'Минимальная длина названия 3 символа').isLength({min: 3}),
+  body('price', 'Введите корректную цену').isNumeric(),
+  body('img', 'Введите корректный url картинки').isURL()
 ]
